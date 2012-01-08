@@ -1,0 +1,63 @@
+===============================================================================
+Needleman-Wunsch Alignment in PHP
+===============================================================================
+
+ABOUT
+
+An implementation of the Needleman-Wunsch global alignment algorithm in PHP.
+Computes the alignment scoring table and optimal global alignment. Provides
+methods to render output in both HTML for display in a web browser and ASCII
+for printing to a terminal. 
+
+USAGE
+
+This code was written for educational purposes to demonstrate how the algorithm
+works. It is not intended for use in real sequence alignment or use with very
+large sequences. Example usage:
+ 
+  <?php
+
+  require_once('needleman-wunsch-class.php');
+
+  $nw = new NeedlemanWunsch(1, 0, -1);
+  $seq1 = 'ACAGTCGAACG';
+  $seq2 = 'ACCGTCCG';
+
+  $nw->renderAsASCII($seq1, $seq2);
+
+  ?>
+
+For a complete interactive example see: alignment.php
+
+Example output:
+
+Alignment Score Table
+
+                   A       C       C       G       T       C       C       G
+           0      -1      -2      -3      -4      -5      -6      -7      -8
+A         -1    ↖  1*   ←  0    ← -1    ← -2    ← -3    ← -4    ← -5    ← -6
+C         -2    ↑  0    ↖  2*   ←  1    ←  0    ← -1    ← -2    ← -3    ← -4
+A         -3    ↑ -1    ↑  1    ↖  2*   ←  1    ←  0    ← -1    ← -2    ← -3
+G         -4    ↑ -2    ↑  0    ↑  1    ↖  3*   ←  2    ←  1    ←  0    ← -1
+T         -5    ↑ -3    ↑ -1    ↑  0    ↑  2    ↖  4*   ←  3    ←  2    ←  1
+C         -6    ↑ -4    ↑ -2    ↖  0    ↑  1    ↑  3    ↖  5*   ←  4    ←  3
+G         -7    ↑ -5    ↑ -3    ↑ -1    ↖  1    ↑  2    ↑  4*   ↖  5    ↖  5
+A         -8    ↑ -6    ↑ -4    ↑ -2    ↑  0    ↑  1    ↑  3*   ↑  4    ↖  5
+A         -9    ↑ -7    ↑ -5    ↑ -3    ↑ -1    ↑  0    ↑  2*   ↑  3    ↑  4
+C         -10   ↑ -8    ↑ -6    ↑ -4    ↑ -2    ↑ -1    ↑  1    ↖  3*   ↑  3
+G         -11   ↑ -9    ↑ -7    ↑ -5    ↑ -3    ↑ -2    ↑  0    ↑  2    ↖  4*
+
+Optimal Global Alignment (score = 4)
+A C C G T C - - - C G
+| |   | | |       | |
+A C A G T C G A A C G
+
+
+AUTHOR
+
+Andrew E. Bruno <aeb@qnot.org>
+
+
+REFERENCES
+
+[1] https://en.wikipedia.org/wiki/Needleman-Wunsch_algorithm
